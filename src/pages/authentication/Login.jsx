@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import  { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
+import { Link,  } from "react-router-dom"; // Assuming you're using React Router for navigation
 
 const Login = () => {
   const {
@@ -19,7 +19,15 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
+        {/* Back to Home Icon */}
+        <Link
+          to={'/'} 
+          className="absolute top-4 left-4 text-gray-600 hover:text-gray-800"
+        >
+          <FaArrowLeft className="h-6 w-6" />
+        </Link>
+
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Login
         </h2>
@@ -103,7 +111,7 @@ const Login = () => {
           {/* Don't have an account? Register here */}
           <div className="text-center text-sm text-gray-600">
             <span>Don't have an account? </span>
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/registration" className="text-blue-600 hover:underline">
               Register here
             </Link>
           </div>

@@ -1,7 +1,10 @@
+// Registration.js
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../provider/AuthProvider";
+
 
 const Registration = () => {
   const {
@@ -11,9 +14,12 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
 
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-  const [isPasswordFocused, setIsPasswordFocused] = useState(false); // State to track password field focus
-  const password = watch("password", ""); // Watch the password field
+  const { signUp } = useAuth(); // Use signUp function from AuthProvider
+  const navigate = useNavigate(); // For navigation
+  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Track password field focus
+  const [error, setError] = useState(""); // Handle registration errors
+  const password = watch("password", ""); // Watch password field
 
   // Password strength checker
   const getPasswordStrength = (password) => {
@@ -21,20 +27,11 @@ const Registration = () => {
 
     let strength = 0;
 
-    // Check for lowercase letters
-    if (/[a-z]/.test(password)) strength += 1;
-
-    // Check for uppercase letters
-    if (/[A-Z]/.test(password)) strength += 1;
-
-    // Check for numbers
-    if (/[0-9]/.test(password)) strength += 1;
-
-    // Check for special characters
-    if (/[^a-zA-Z0-9]/.test(password)) strength += 1;
-
-    // Check for minimum length
-    if (password.length >= 8) strength += 1;
+    if (/[a-z]/.test(password)) strength += 1; // Lowercase
+    if (/[A-Z]/.test(password)) strength += 1; // Uppercase
+    if (/[0-9]/.test(password)) strength += 1; // Numbers
+    if (/[^a-zA-Z0-9]/.test(password)) strength += 1; // Special characters
+    if (password.length >= 8) strength += 1; // Minimum length
 
     return strength;
   };
@@ -63,16 +60,28 @@ const Registration = () => {
 
   const { label: strengthLabel, color: strengthColor } = getStrengthLabel(passwordStrength);
 
-  const onSubmit = (data) => {
-    console.log(data); // Handle form submission
+  // Handle form submission
+  const onSubmit = async (data) => {
+    try {
+      await signUp(data.email, data.password); // Sign up with Firebase
+      navigate("/"); // Redirect to home page after registration
+    } catch (error) {
+      setError(error.message); // Handle registration errors
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        {/* Back to Home Icon */}
+        <Link to="/" className="text-gray-600 hover:text-gray-800">
+          <FaArrowLeft className="h-6 w-6" />
+        </Link>
+
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Register
         </h2>
+        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Name Field */}
           <div>
@@ -151,9 +160,9 @@ const Registration = () => {
                   errors.password ? "border-red-500" : "border-gray-300"
                 } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 placeholder="Enter your password"
-                onFocus={() => setIsPasswordFocused(true)} // Show strength meter on focus
+                onFocus={() => setIsPasswordFocused(true)}
                 onBlur={() => {
-                  if (!password) setIsPasswordFocused(false); // Hide strength meter if password is empty
+                  if (!password) setIsPasswordFocused(false);
                 }}
               />
               <div
@@ -171,7 +180,7 @@ const Registration = () => {
               <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
             )}
 
-            {/* Password Strength Meter (Conditional Rendering) */}
+            {/* Password Strength Meter */}
             {isPasswordFocused && (
               <div className="mt-2">
                 <div className="w-full bg-gray-200 rounded-full h-2">
