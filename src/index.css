@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+
+
+.task-container {
+    min-height: 60px; /* Ensure it has a minimum height for dragging */
+  }
+  
