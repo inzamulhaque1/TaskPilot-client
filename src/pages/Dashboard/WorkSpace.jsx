@@ -34,14 +34,19 @@ const WorkSpace = () => {
   useEffect(() => {
     fetchTasks();
   
-    socket.on("taskCreated", (task) => {
-      setTasks((prev) => ({
-        ...prev,
-        [task.category]: [...prev[task.category], task],
-      }));
+    socket.on("taskCreated", handleTaskCreated);
+    socket.on("taskUpdated", (task) => {
+      setTasks((prev) => {
+        const newTasks = { ...prev };
+        Object.keys(newTasks).forEach((category) => {
+          newTasks[category] = newTasks[category].filter(
+            (t) => t._id !== task._id
+          );
+        });
+        newTasks[task.category].push(task);
+        return newTasks;
+      });
     });
-  
-    socket.on("taskUpdated", handleTaskUpdated);
     socket.on("taskDeleted", handleTaskDeleted);
   
     return () => {
@@ -124,12 +129,27 @@ const WorkSpace = () => {
   const handleUpdateTask = async (taskId, e) => {
     e.preventDefault();
     if (!editedTask.title) return;
-
+  
     try {
       const response = await axios.put(
         `${API_URL}/tasks/${taskId}`,
         editedTask
       );
+      const updatedTask = response.data; // Assuming the server returns the updated task
+  
+      // Update the state immediately
+      setTasks((prev) => {
+        const newTasks = { ...prev };
+        Object.keys(newTasks).forEach((category) => {
+          newTasks[category] = newTasks[category].filter(
+            (t) => t._id !== taskId
+          );
+        });
+        newTasks[updatedTask.category].push(updatedTask);
+        return newTasks;
+      });
+  
+      // Reset the editing state
       setEditingTask(null);
       setEditedTask({ title: "", description: "", category: "" });
     } catch (error) {
@@ -448,7 +468,7 @@ const WorkSpace = () => {
                                   <div className="mt-2 flex gap-2">
                                     <button
                                       onClick={() => handleEditTask(task)}
-                                      className={`p-2 rounded-md ${
+                                      className={`p-2 cursor-pointer rounded-md ${
                                         task.category === "Done"
                                           ? "bg-green-500 text-white"
                                           : task.category === "In Progress"
@@ -461,7 +481,7 @@ const WorkSpace = () => {
                                     </button>
                                     <button
                                       onClick={() => handleDeleteTask(task._id)}
-                                      className="p-2 rounded-md bg-red-500 dark:bg-red-900 text-white dark:text-red-300 hover:bg-red-500 dark:hover:bg-red-700 hover:text-white transition"
+                                      className="p-2  cursor-pointer rounded-md bg-red-500 dark:bg-red-900 text-white dark:text-red-300 hover:bg-red-500 dark:hover:bg-red-700 hover:text-white transition"
                                       title="Delete Task"
                                     >
                                       <MdDeleteForever />
