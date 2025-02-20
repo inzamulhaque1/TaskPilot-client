@@ -1,8 +1,11 @@
+import FeaturesSection from "./FeaturesSection";
+import HeroSection from "./HeroSection";
 
 const Home = () => {
     return (
-        <div>
-            <h1>Welcome to the Home Page</h1>
+        <div className="exo2">
+            <HeroSection></HeroSection>
+            <FeaturesSection></FeaturesSection>
         </div>
     );
 };

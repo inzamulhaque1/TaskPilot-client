@@ -1,10 +1,26 @@
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/UseAuth";
 import { useState, useEffect } from "react";
+import useAuth from "../../hooks/UseAuth";
+import { FaSun, FaMoon } from "react-icons/fa"; // Icons for dark mode toggle
+import logo from "../../assets/images/logo/TaskPilot1.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [showTooltip, setShowTooltip] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  // Apply theme on mount and on toggle
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   // Close tooltip when clicking outside
   useEffect(() => {
@@ -18,10 +34,39 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-green-500">
+    <nav className="bg-[#1B4D3E] dark:bg-[#211444] transition-colors duration-300">
       <div className="p-4 w-9/12 mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">TaskPilot</div>
-        <div className="flex space-x-4">
+        <div className="text-white text-2xl libre font-bold">
+          <img className="h-[60px] rounded-xl" src={logo} alt="TaskPilot Logo" />
+        </div>
+
+        <div className="flex space-x-4 items-center">
+          {/* Dark Mode Toggle with Animation */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="text-white text-xl focus:outline-none relative w-6 h-6 flex items-center justify-center"
+            aria-label="Toggle dark mode"
+          >
+            <span
+              className={`absolute transition-all duration-500 ease-in-out ${
+                darkMode
+                  ? "opacity-0 rotate-90 scale-0"
+                  : "opacity-100 rotate-0 scale-100"
+              }`}
+            >
+              <FaMoon />
+            </span>
+            <span
+              className={`absolute hover:rotate-360 transition-all duration-500 ease-in-out ${
+                darkMode
+                  ? "opacity-100 rotate-0 scale-100"
+                  : "opacity-0 -rotate-90 scale-0"
+              }`}
+            >
+              <FaSun />
+            </span>
+          </button>
+
           {!user ? (
             <>
               <Link
@@ -52,26 +97,26 @@ const Navbar = () => {
                         user.photoURL ||
                         "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                       }
-                      alt="Avatar"
+                      alt="User Avatar"
                     />
                   </div>
                 </div>
 
                 {/* Tooltip Button */}
                 {showTooltip && (
-                  <div className="absolute  top-full mt-2 -right-10 bg-lime-500 p-2 text-black shadow-lg rounded-md flex flex-col gap-2">
+                  <div className="absolute z-10 top-full mt-2 -right-10 bg-lime-500 p-2 text-black shadow-lg rounded-md flex flex-col gap-2">
                     <Link
                       to="/dashboard"
-                      className="bg-white text-blue-600 px-4 py-2 rounded-full  shadow-md hover:bg-gray-200 transition duration-300"
+                      className="bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
                     >
                       Dashboard
                     </Link>
-                    <Link
-                      className="bg-white text-red-500 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+                    <button
                       onClick={logOut}
+                      className="bg-white text-red-500 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
                     >
                       Sign Out
-                    </Link>
+                    </button>
                   </div>
                 )}
               </div>

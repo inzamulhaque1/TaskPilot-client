@@ -7,8 +7,12 @@ import useAuth from "../hooks/UseAuth";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { logOut } = useAuth();
+  const { logOut,user } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  if (!user) {
+    window.location.href = "/login";
+  }
 
   useEffect(() => {
     if (theme === "dark") {
