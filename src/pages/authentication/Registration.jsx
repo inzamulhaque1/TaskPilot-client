@@ -76,7 +76,7 @@ const Registration = () => {
       });
   
       // Step 3: Redirect to the home page after successful registration
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message); // Handle registration errors
     }

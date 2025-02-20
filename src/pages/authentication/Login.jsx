@@ -22,7 +22,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await signIn(data.email, data.password);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       let errorMessage = "Login failed. Please try again.";
       if (error.code === "auth/user-not-found") {

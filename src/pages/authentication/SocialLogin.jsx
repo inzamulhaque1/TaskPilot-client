@@ -13,7 +13,7 @@ const SocialLogin = () => {
     try {
       await googleSignIn();
       // On success, redirect to the home page (or wherever you want)
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setError(error.message); // Display error if login fails
       console.error("Google Sign-In Error:", error);
