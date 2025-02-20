@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+
 import useAuth from "../../hooks/UseAuth";
 import { FaBars } from "react-icons/fa"; // React Icon for menu
 
@@ -16,17 +16,6 @@ const TopRibbon = ({ toggleSidebar }) => {
         >
           <FaBars />
         </button>
-      </div>
-
-      {/* Logo */}
-      <div className="flex justify-center p-3 md:p-5">
-        <Link to={"/"}>
-          <img
-            src="/logo-light.png" // Static logo change
-            alt="Logo"
-            className="h-8 w-auto"
-          />
-        </Link>
       </div>
 
       {/* User Info Section */}

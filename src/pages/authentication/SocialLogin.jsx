@@ -23,7 +23,7 @@ const SocialLogin = () => {
       };
 
       // Send user data to the backend
-      const response = await fetch("http://localhost:5000/users", {
+      const response = await fetch("https://taskpilot-server-pied.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
