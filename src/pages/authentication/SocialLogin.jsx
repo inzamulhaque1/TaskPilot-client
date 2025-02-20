@@ -11,12 +11,35 @@ const SocialLogin = () => {
   // Handle Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn();
-      // On success, redirect to the home page (or wherever you want)
+      const result = await googleSignIn(); // Perform Google Sign-In
+      const user = result.user; // Get the authenticated user from Firebase
+
+      // Prepare user data to send to the backend
+      const userData = {
+        uid: user.uid, // Unique user ID from Firebase
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      };
+
+      // Send user data to the backend
+      const response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save user data to the backend");
+      }
+
+      // On success, redirect to the dashboard
       navigate("/dashboard");
     } catch (error) {
-      setError(error.message); // Display error if login fails
-      console.error("Google Sign-In Error:", error);
+      setError(error.message); // Display error if login or backend save fails
+      console.error("Google Sign-In or Backend Error:", error);
     }
   };
 
@@ -30,7 +53,7 @@ const SocialLogin = () => {
         onClick={handleGoogleSignIn}
         className="flex items-center justify-center w-full max-w-xs bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <FcGoogle className="h-6 w-6 mr-2" /> 
+        <FcGoogle className="h-6 w-6 mr-2" />
         Sign in with Google
       </button>
     </div>

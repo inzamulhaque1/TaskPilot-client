@@ -75,12 +75,37 @@ const Registration = () => {
         displayName: data.name, // Set the displayName to the name provided in the form
       });
   
-      // Step 3: Redirect to the home page after successful registration
-      navigate("/dashboard");
+      // Step 3: Send the user data to the backend
+      const userData = {
+        uid: userCredential.user.uid,
+        email: data.email,
+        displayName: data.name,
+      };
+  
+      const response = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log("User saved to the database:", result);
+        // Step 4: Redirect to the dashboard after successful registration
+        navigate("/dashboard");
+      } else {
+        console.error("Failed to save user:", result.message);
+        setError(result.message); // Display the error message if user creation fails
+      }
     } catch (error) {
+      console.error("Registration Error:", error);
       setError(error.message); // Handle registration errors
     }
   };
+  
   
 
   return (
