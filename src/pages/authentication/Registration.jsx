@@ -3,7 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../provider/AuthProvider";
+import useAuth from "../../hooks/UseAuth";
+import { updateProfile } from "firebase/auth";
+import SocialLogin from "./SocialLogin";
+
+
 
 
 const Registration = () => {
@@ -63,12 +67,21 @@ const Registration = () => {
   // Handle form submission
   const onSubmit = async (data) => {
     try {
-      await signUp(data.email, data.password); // Sign up with Firebase
-      navigate("/"); // Redirect to home page after registration
+      // Step 1: Create the user with email and password
+      const userCredential = await signUp(data.email, data.password);
+  
+      // Step 2: Update the user profile with the displayName
+      await updateProfile(userCredential.user, {
+        displayName: data.name, // Set the displayName to the name provided in the form
+      });
+  
+      // Step 3: Redirect to the home page after successful registration
+      navigate("/");
     } catch (error) {
       setError(error.message); // Handle registration errors
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -214,6 +227,7 @@ const Registration = () => {
             </Link>
           </div>
         </form>
+        <SocialLogin></SocialLogin>
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
-import { Link,  } from "react-router-dom"; // Assuming you're using React Router for navigation
+import { Link, useNavigate,  } from "react-router-dom"; // Assuming you're using React Router for navigation
+import SocialLogin from "./SocialLogin";
+import useAuth from "../../hooks/UseAuth";
 
 const Login = () => {
   const {
@@ -11,10 +14,28 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const { signIn } = useAuth(); 
+  const navigate = useNavigate(); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(""); 
 
-  const onSubmit = (data) => {
-    console.log(data); // Handle login submission
+  const onSubmit = async (data) => {
+    try {
+      await signIn(data.email, data.password);
+      navigate("/");
+    } catch (error) {
+      let errorMessage = "Login failed. Please try again.";
+      if (error.code === "auth/user-not-found") {
+        errorMessage = "No user found with this email.";
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email format.";
+      } else {
+        errorMessage = error.message;
+      }
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -115,6 +136,7 @@ const Login = () => {
               Register here
             </Link>
           </div>
+          <SocialLogin></SocialLogin>
         </form>
       </div>
     </div>
