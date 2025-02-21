@@ -99,6 +99,14 @@
   box-shadow: 0 0 12px rgba(67, 160, 71, 0.8), 0 0 24px rgba(67, 160, 71, 0.6); /* Stronger glowing effect */
 }
 
+/* Customize scrollbar for mobile devices */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 5px; /* Adjust width for mobile */
+    height: 5px; /* Adjust height for horizontal scrollbar on mobile */
+  }
+}
+
 /* Glow Animation */
 @keyframes glow {
   0% {
@@ -110,5 +118,18 @@
 }
 
 
+/* Add this to your global CSS */
+.top-ribbon {
+  background: linear-gradient(135deg, #143D3A 0%, #1A5E5A 100%);
+}
 
+.dark .top-ribbon {
+  background: linear-gradient(135deg, #211444 0%, #3A2B7E 100%);
+}
+
+
+
+.glow-effect {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+}
 

@@ -51,7 +51,7 @@ const SocialLogin = () => {
       {/* Google Login Button */}
       <button
         onClick={handleGoogleSignIn}
-        className="flex items-center justify-center w-full max-w-xs bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex items-center cursor-pointer justify-center w-full max-w-xs bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <FcGoogle className="h-6 w-6 mr-2" />
         Sign in with Google

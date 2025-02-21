@@ -7,6 +7,8 @@ import { MdDeleteForever } from "react-icons/md";
 import moment from "moment";
 import io from "socket.io-client";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 
 const API_URL = "https://taskpilot-server-pied.vercel.app";
 const socket = io(API_URL);
@@ -141,11 +143,11 @@ const WorkSpace = () => {
       setTasks((prev) => {
         const newTasks = { ...prev };
         Object.keys(newTasks).forEach((category) => {
-          newTasks[category] = newTasks[category].filter(
-            (t) => t._id !== taskId
+          newTasks[category] = newTasks[category].map((task) =>
+            task._id === taskId ? { ...task, ...editedTask } : task
           );
         });
-        newTasks[updatedTask.category].push(updatedTask);
+        // newTasks[updatedTask.category].push(updatedTask);
         return newTasks;
       });
   
@@ -195,6 +197,9 @@ const WorkSpace = () => {
 
     // Insert into destination
     destTasks.splice(destination.index, 0, movingTask);
+
+    // Update category immediately
+  movingTask.category = destCategory;
 
     // Update the state
     setTasks((prev) => ({
@@ -257,24 +262,47 @@ const WorkSpace = () => {
     }
   };
 
+
+
   const handleDeleteTask = async (taskId) => {
     if (!taskId) return;
+  
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+  
+    if (!result.isConfirmed) return; // User canceled
+  
+    // Optimistically remove task from UI
+    const previousTasks = { ...tasks };
+    setTasks((prev) => {
+      const newTasks = { ...prev };
+      Object.keys(newTasks).forEach((category) => {
+        newTasks[category] = newTasks[category].filter((t) => t._id !== taskId);
+      });
+      return newTasks;
+    });
   
     try {
       await axios.delete(`${API_URL}/tasks/${taskId}`);
   
-      // Update the state immediately
-      setTasks((prev) => {
-        const newTasks = { ...prev };
-        Object.keys(newTasks).forEach((category) => {
-          newTasks[category] = newTasks[category].filter((t) => t._id !== taskId);
-        });
-        return newTasks;
-      });
+      Swal.fire("Deleted!", "Your task has been deleted.", "success");
     } catch (error) {
       console.error("Error deleting task:", error);
+  
+      // Restore previous tasks if API call fails
+      setTasks(previousTasks);
+  
+      Swal.fire("Error!", "Failed to delete task. Please try again.", "error");
     }
   };
+  
 
   const handleCategoryChange = async (taskId, newCategory) => {
     try {

@@ -60,7 +60,7 @@ const Login = () => {
             </label>
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaEnvelope className="h-5 w-5 text-gray-400" />
+                <FaEnvelope className="h-5 w-5 text-green-500" />
               </div>
               <input
                 type="email"
@@ -74,7 +74,7 @@ const Login = () => {
                 })}
                 className={`block w-full pl-10 pr-4 py-2 border ${
                   errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500`}
                 placeholder="Enter your email"
               />
             </div>
@@ -90,7 +90,7 @@ const Login = () => {
             </label>
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaLock className="h-5 w-5 text-gray-400" />
+                <FaLock className="h-5 w-5 text-green-500" />
               </div>
               <input
                 type={showPassword ? "text" : "password"}
@@ -100,7 +100,7 @@ const Login = () => {
                 })}
                 className={`block w-full pl-10 pr-12 py-2 border ${
                   errors.password ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500`}
                 placeholder="Enter your password"
               />
               <div
@@ -108,9 +108,9 @@ const Login = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <FaEyeSlash className="h-5 w-5 text-gray-400" />
+                  <FaEyeSlash className="h-5 w-5 text-red-500" />
                 ) : (
-                  <FaEye className="h-5 w-5 text-gray-400" />
+                  <FaEye className="h-5 w-5 text-green-500" />
                 )}
               </div>
             </div>
@@ -123,7 +123,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full cursor-pointer bg-green-700 text-white py-2 px-4 font-bold rounded-md hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Login
             </button>

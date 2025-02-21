@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import TopRibbon from "../pages/Dashboard/TopRibbon";
 import Sidebar from "../pages/Dashboard/Sidebar";
-import WorkSpace from "../pages/Dashboard/WorkSpace";
 import useAuth from "../hooks/UseAuth";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,7 +32,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="exo2">
       <TopRibbon 
         toggleSidebar={toggleSidebar} 
         toggleTheme={toggleTheme}
@@ -56,7 +56,7 @@ const Dashboard = () => {
         </div>
 
         <div className="flex-1 bg-gray-100 overflow-y-auto h-full dark:bg-[#0B0716]">
-          <WorkSpace />
+          <Outlet></Outlet>
         </div>
       </div>
     </div>

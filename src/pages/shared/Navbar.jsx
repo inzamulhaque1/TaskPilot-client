@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/UseAuth";
 import { FaSun, FaMoon } from "react-icons/fa"; // Icons for dark mode toggle
@@ -38,6 +38,35 @@ const Navbar = () => {
       <div className="p-4 w-9/12 mx-auto flex justify-between items-center">
         <div className="text-white text-2xl libre font-bold">
           <img className="h-[60px] rounded-xl" src={logo} alt="TaskPilot Logo" />
+        </div>
+
+        {/* Center Menu Items */}
+        <div className="flex flex-1 justify-center space-x-6">
+          {user ? (
+            <>
+              <NavLink
+                to="/dashboard"
+                className="text-white text-lg font-semibold hover:text-blue-400 transition duration-300"
+                activeClassName="text-blue-500"
+              >
+                Dashboard
+              </NavLink>
+              <NavLink
+                to="/dashboard"
+                className="text-white text-lg font-semibold hover:text-blue-400 transition duration-300"
+                activeClassName="text-blue-500"
+              >
+                Tasks
+              </NavLink>
+              <NavLink
+                to="/dashboard"
+                className="text-white text-lg font-semibold hover:text-blue-400 transition duration-300"
+                activeClassName="text-blue-500"
+              >
+                Profile
+              </NavLink>
+            </>
+          ) : null}
         </div>
 
         <div className="flex space-x-4 items-center">
@@ -93,10 +122,7 @@ const Navbar = () => {
                   <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-full">
                     <img
                       className="h-10 w-10 lg:h-12 lg:w-12 rounded-full"
-                      src={
-                        user.photoURL ||
-                        "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      }
+                      src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
                       alt="User Avatar"
                     />
                   </div>
