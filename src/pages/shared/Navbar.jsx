@@ -34,7 +34,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-[#1B4D3E] dark:bg-[#211444] transition-colors duration-300">
+    <nav className="bg-[#1B4D3E] dark:bg-[#211444] transition-colors duration-300 sticky top-0 z-50 shadow-md backdrop-filter backdrop-blur-lg bg-opacity-60">
       <div className="p-4 w-9/12 mx-auto flex justify-between items-center">
         <div className="text-white text-2xl libre font-bold">
           <img className="h-[60px] rounded-xl" src={logo} alt="TaskPilot Logo" />

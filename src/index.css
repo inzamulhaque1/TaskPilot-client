@@ -37,3 +37,78 @@
   .exo2 {
     font-family: "Exo 2", serif;
   }
+
+
+  .clip-polygon {
+    clip-path: polygon(10% 0%, 90% 0%, 100% 25%, 100% 75%, 90% 100%, 10% 100%, 0% 75%, 0% 25%);
+  }
+
+
+  @keyframes snake-border {
+    0% {
+      border-image-source: linear-gradient(90deg, #6EE7B7, #FF014F, #A78BFA);
+      border-image-slice: 1;
+    }
+    25% {
+      border-image-source: linear-gradient(180deg, #6EE7B7, #FF014F, #A78BFA);
+      border-image-slice: 1;
+    }
+    50% {
+      border-image-source: linear-gradient(270deg, #6EE7B7, #FF014F, #A78BFA);
+      border-image-slice: 1;
+    }
+    75% {
+      border-image-source: linear-gradient(360deg, #6EE7B7, #FF014F, #A78BFA);
+      border-image-slice: 1;
+    }
+    100% {
+      border-image-source: linear-gradient(90deg, #6EE7B7, #FF014F, #A78BFA);
+      border-image-slice: 1;
+    }
+  }
+  
+  .animate-border {
+    animation: snake-border 4s linear infinite;
+  }
+  
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px; /* For horizontal scrollbar */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #d0f52c, #f70f0f); /* Green gradient for the track */
+  border-radius: 0px;
+}
+
+/* Scrollbar Handle (Thumb) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #023f05, #39f742, #042706); /* Green gradient for thumb */
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(102, 187, 106, 0.8); /* Glowing effect */
+  animation: glow 1.5s infinite alternate; /* Glow animation */
+}
+
+/* Scrollbar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #43a047, #66bb6a); /* Lighter green thumb color on hover */
+  box-shadow: 0 0 12px rgba(67, 160, 71, 0.8), 0 0 24px rgba(67, 160, 71, 0.6); /* Stronger glowing effect */
+}
+
+/* Glow Animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 6px rgba(67, 160, 71, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(67, 160, 71, 1), 0 0 24px rgba(67, 160, 71, 0.8);
+  }
+}
+
+
+
+
