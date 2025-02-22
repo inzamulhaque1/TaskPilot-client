@@ -1,8 +1,36 @@
 import { Link } from "react-router-dom";
 import taskIllustration from "../../assets/images/img.png";
 import bgImage from "../../assets/images/bg/bg-adv.jpg";
-
+import { motion } from "framer-motion";
+import {  FaSnowflake } from "react-icons/fa";
 const HeroSection = () => {
+
+        // Snowfall effect with random positioning across the full width
+    const snowflakes = Array.from({ length: 30 }).map((_, i) => {
+      const randomX = () => Math.random() * 10000; // Random X position (0-100%)
+      return (
+        <motion.div
+          key={i}
+          className="absolute text-white dark:text-gray-300 pointer-events-none"
+          initial={{ x: `${randomX()}%`, y: -20 }}
+          animate={{
+            y: "100vh",
+            x: `${randomX() + (Math.random() - 0.5) * 20}%`, // Slight random sway
+            rotate: Math.random() * 360,
+          }}
+          transition={{
+            duration: Math.random() * 5 + 5,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "linear",
+            delay: Math.random() * 2,
+          }}
+        >
+          <FaSnowflake size={Math.random() * 20 + 10} opacity={0.7} />
+        </motion.div>
+      );
+    });
+    
   return (
     <section
       className="relative flex flex-col md:flex-row items-center justify-between py-12 md:py-20 px-4 md:px-12 
@@ -12,7 +40,7 @@ const HeroSection = () => {
     >
       {/* Overlay for better text visibility */}
       <div className="absolute inset-0 bg-black/50 dark:bg-[#211444]/80"></div>
-
+      <div className="absolute inset-0 z-0">{snowflakes}</div>
       {/* Image Section */}
       <div className="relative z-10 w-full md:w-1/2 lg:w-2/5 flex justify-center md:justify-start mb-8 md:mb-0 animate-fade-in-left">
         <img

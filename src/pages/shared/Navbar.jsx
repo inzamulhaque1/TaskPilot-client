@@ -130,16 +130,16 @@ const Navbar = () => {
 
                 {/* Tooltip Button */}
                 {showTooltip && (
-                  <div className="absolute z-10 top-full mt-2 -right-10 bg-lime-500 p-2 text-black shadow-lg rounded-md flex flex-col gap-2">
+                  <div className="absolute z-10 top-full mt-2 -right-10 bg-orange-100 p-2 text-black shadow-lg rounded-md flex flex-col gap-2">
                     <Link
                       to="/dashboard"
-                      className="bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
                     >
                       Dashboard
                     </Link>
                     <button
                       onClick={logOut}
-                      className="bg-white text-red-500 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+                      className="bg-red-500 text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
                     >
                       Sign Out
                     </button>

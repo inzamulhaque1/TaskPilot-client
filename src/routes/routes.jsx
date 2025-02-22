@@ -7,6 +7,9 @@ import Dashboard from "../layout/Dashboard";
 import WorkSpace from "../pages/Dashboard/WorkSpace";
 import MyProfile from "../pages/Dashboard/MyProfile";
 
+import Test from "../pages/Dashboard/Test";
+import Calendar from "../pages/Dashboard/calender";
+
 
 export const router = createBrowserRouter([
   {
@@ -36,8 +39,16 @@ export const router = createBrowserRouter([
         element: <WorkSpace></WorkSpace>,
       },
       {
-        path: "dashboard/profile",
+        path: "profile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "calender",
+        element: <Calendar></Calendar>,
+      },
+      {
+        path: "test",
+        element: <Test></Test>,
       },
     ],
   },

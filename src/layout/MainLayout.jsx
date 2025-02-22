@@ -3,9 +3,13 @@ import Navbar from "../pages/shared/Navbar";
 import Footer from "../pages/shared/Footer";
 
 const MainLayout = () => {
+
+
     return (
-        <div>
+        <div className="relative">
+            
             <Navbar></Navbar>
+            
             <Outlet></Outlet>
             <Footer></Footer>
         </div>
