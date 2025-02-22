@@ -1,213 +1,241 @@
-Here's the complete README file, including installation instructions and all the requested sections:
+Got it! If you're looking for a **README.md** file that aligns with the style of the default Vite + React template, here's a clean and concise version tailored for your **TaskPilot** project:
 
-```markdown
+---
+
 # TaskPilot
 
 ![TaskPilot Logo](https://github.com/inzamulhaque1/TaskPilot-client/blob/main/src/assets/images/logo/TaskPilot.png)
 
-**TaskPilot** is a powerful and user-friendly task management application designed to help you stay organized and on track. It allows you to manage tasks with features like drag-and-drop functionality, real-time updates, task categorization, and more. Whether you are working solo or as part of a team, TaskPilot helps you stay productive and efficient.
+## Overview
 
----
-
-## Live Links
-
-- **Frontend**: [Live Demo](https://your-live-link.com) (replace with actual link)
-- **Backend**: [Live API](https://your-api-link.com) (replace with actual link)
-
----
-
-## Technologies Used
-
-- **Frontend**: React, Tailwind CSS, Vite.js
-- **Backend**: Node.js, Express, MongoDB, Socket.io
-- **Authentication**: Firebase Authentication (Google Sign-in)
-- **Real-Time Updates**: Socket.io & MongoDB Change Streams
-- **State Management**: React Hook Form
+**TaskPilot** is a modern task management application built with **React** and **Vite**. It helps users organize their tasks efficiently with features like drag-and-drop task organization, calendar integration, and real-time updates.
 
 ---
 
 ## Features
 
-- **Drag-and-Drop** task management
-- **Real-Time Updates** using MongoDB Change Streams
-- **Task Categorization** (To-Do, In Progress, Done)
-- **Instant Database Persistence**
-- **Responsive UI** with a minimalistic design
-- **Dark Mode Toggle**
-- **Task Due Dates** with color indicators
-- **Activity Log** to track task changes
-- **User Authentication** via Firebase
+- **Task Management**: Create, update, and delete tasks.
+- **Calendar Integration**: View tasks on a calendar for better planning.
+- **Drag-and-Drop**: Reorder tasks using a drag-and-drop interface.
+- **Real-Time Updates**: Collaborate with team members in real-time.
+- **Light/Dark Mode**: Switch between light and dark themes.
 
 ---
 
-## Dependencies
+## Live Links
 
-### Frontend (Client)
+- **Frontend**: [TaskPilot Client](https://taskpilot-client.vercel.app)
+- **Backend**: [TaskPilot Server](https://taskpilot-server.vercel.app)
 
-```json
-"dependencies": {
-  "@firebase/auth": "^1.9.0",
-  "@firebase/firestore": "^4.7.8",
-  "@hello-pangea/dnd": "^18.0.1",
-  "@radix-ui/react-icons": "^1.3.2",
-  "@tailwindcss/vite": "^4.0.7",
-  "axios": "^1.7.9",
-  "date-fns": "^4.1.0",
-  "firebase": "^11.3.1",
-  "framer-motion": "^12.4.5",
-  "localforage": "^1.10.0",
-  "lodash": "^4.17.21",
-  "lucide-react": "^0.475.0",
-  "match-sorter": "^8.0.0",
-  "moment": "^2.30.1",
-  "react": "^18.3.1",
-  "react-beautiful-dnd": "^13.1.1",
-  "react-dom": "^18.2.0",
-  "react-hook-form": "^7.54.2",
-  "react-icons": "^5.5.0",
-  "react-router-dom": "^7.2.0",
-  "react-tooltip": "^5.28.0",
-  "socket.io-client": "^4.8.1",
-  "sort-by": "^1.2.0",
-  "sweetalert2": "^11.17.2",
-  "tailwindcss": "^4.0.7"
-},
-"devDependencies": {
-  "@eslint/js": "^9.19.0",
-  "@types/react": "^19.0.8",
-  "@types/react-dom": "^19.0.3",
-  "@vitejs/plugin-react": "^4.3.4",
-  "eslint": "^9.19.0",
-  "eslint-plugin-react": "^7.37.4",
-  "eslint-plugin-react-hooks": "^5.0.0",
-  "eslint-plugin-react-refresh": "^0.4.18",
-  "globals": "^15.14.0",
-  "vite": "^6.1.0"
-}
-```
+---
 
-### Backend (Server)
+## Technologies Used
 
-```json
-"dependencies": {
-  "cors": "^2.8.5",
-  "dotenv": "^16.4.7",
-  "express": "^4.21.2",
-  "mongodb": "^6.13.0",
-  "socket.io": "^4.8.1"
-}
-```
+### Frontend:
+- **React**: A JavaScript library for building user interfaces.
+- **Vite**: A fast build tool for modern web development.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **Framer Motion**: For animations and transitions.
+- **Axios**: For making HTTP requests to the backend.
+- **React Icons**: For icons used in the application.
+- **React Router DOM**: For client-side routing.
+- **Socket.IO Client**: For real-time communication with the backend.
+- **Date-fns**: For date manipulation and formatting.
+
+### Backend:
+- **Express.js**: A Node.js framework for building RESTful APIs.
+- **MongoDB**: A NoSQL database for storing tasks and user data.
+- **Socket.IO**: For real-time communication with the frontend.
+- **CORS**: For enabling cross-origin resource sharing.
+- **Dotenv**: For managing environment variables.
 
 ---
 
 ## Installation
 
-### Frontend (Client)
-
-1. **Clone the repository**:
+### Frontend:
+1. Clone the repository:
    ```bash
    git clone https://github.com/inzamulhaque1/TaskPilot-client.git
    ```
-
-2. **Navigate to the project directory**:
+2. Navigate to the project directory:
    ```bash
    cd TaskPilot-client
    ```
-
-3. **Install dependencies**:
+3. Install dependencies:
    ```bash
    npm install
    ```
-
-4. **Run the development server**:
+4. Start the development server:
    ```bash
    npm run dev
    ```
 
-   This will start the frontend in development mode. Open your browser and visit `http://localhost:3000` to view the application.
-
----
-
-### Backend (Server)
-
-1. **Clone the repository**:
+### Backend:
+1. Clone the repository:
    ```bash
    git clone https://github.com/inzamulhaque1/TaskPilot-server.git
    ```
-
-2. **Navigate to the project directory**:
+2. Navigate to the project directory:
    ```bash
    cd TaskPilot-server
    ```
-
-3. **Install dependencies**:
+3. Install dependencies:
    ```bash
    npm install
    ```
-
-4. **Set up your environment variables**:
-   - Create a `.env` file in the root directory.
-   - Add your environment variables like MongoDB URI, Firebase credentials, etc.
-
-   Example:
-   ```env
-   MONGO_URI=mongodb://your-mongo-db-uri
-   FIREBASE_API_KEY=your-firebase-api-key
-   ```
-
-5. **Start the backend server**:
+4. Start the server:
    ```bash
    npm start
    ```
-
-   This will start the backend server on `http://localhost:5000`.
 
 ---
 
 ## Folder Structure
 
-```bash
-TaskPilot/
-├── client/                # Frontend code
-│   ├── src/
-│   ├── public/
-│   ├── vite.config.js
-│   ├── package.json
-│   └── README.md
-├── server/                # Backend code
-│   ├── src/
-│   ├── .env
-│   ├── package.json
-│   └── README.md
-└── README.md              # Project root README
+### Frontend:
+```
+TaskPilot-client/
+├── public/
+├── src/
+│   ├── assets/            # Static assets (images, logos, etc.)
+│   ├── components/        # Reusable components
+│   ├── pages/             # Application pages
+│   ├── utils/             # Utility functions
+│   ├── App.jsx            # Main application component
+│   ├── main.jsx           # Entry point
+├── .eslintrc.js           # ESLint configuration
+├── .gitignore             # Git ignore file
+├── package.json           # Frontend dependencies
+├── tailwind.config.js     # Tailwind CSS configuration
+└── vite.config.js         # Vite configuration
+```
+
+### Backend:
+```
+TaskPilot-server/
+├── controllers/           # Request handlers
+├── models/                # Database models
+├── routes/                # API routes
+├── utils/                 # Utility functions
+├── index.js               # Entry point
+├── .env                   # Environment variables
+├── .gitignore             # Git ignore file
+└── package.json           # Backend dependencies
 ```
 
 ---
 
-## Code Cleanliness & Best Practices
+## Dependencies
 
-- **Modularization**: The project is organized into modular components and services for better maintainability.
-- **Code Formatting**: The code follows consistent formatting using Prettier.
-- **ESLint**: Ensures clean and consistent JavaScript code by following ESLint rules.
-- **Version Control**: Git is used for version control, and GitHub Actions are set up for Continuous Integration (CI).
-- **Error Handling**: Proper error handling mechanisms are in place both on the frontend and backend.
+### Frontend:
+```json
+{
+  "dependencies": {
+    "@firebase/auth": "^1.9.0",
+    "@firebase/firestore": "^4.7.8",
+    "@hello-pangea/dnd": "^18.0.1",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@tailwindcss/vite": "^4.0.7",
+    "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
+    "firebase": "^11.3.1",
+    "framer-motion": "^12.4.5",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.475.0",
+    "match-sorter": "^8.0.0",
+    "moment": "^2.30.1",
+    "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.54.2",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.2.0",
+    "react-tooltip": "^5.28.0",
+    "socket.io-client": "^4.8.1",
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.17.2",
+    "tailwindcss": "^4.0.7"
+  }
+}
+```
+
+### Backend:
+```json
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0",
+    "socket.io": "^4.8.1"
+  }
+}
+```
+
+---
+
+## Scripts
+
+### Frontend:
+- `npm run dev`: Start the development server.
+- `npm run build`: Build the project for production.
+- `npm run lint`: Run ESLint to check for code issues.
+- `npm run preview`: Preview the production build locally.
+
+### Backend:
+- `npm start`: Start the backend server.
+
+---
+
+## Best Practices
+
+1. **Code Cleanliness**:
+   - Follow consistent naming conventions for variables, functions, and files.
+   - Use ESLint and Prettier for code formatting and linting.
+
+2. **Folder Structure**:
+   - Organize files into logical folders (e.g., `components`, `pages`, `utils`).
+   - Keep reusable components in the `components` folder.
+
+3. **Environment Variables**:
+   - Use `.env` files to store sensitive information like API keys and database credentials.
+
+4. **Responsive Design**:
+   - Use Tailwind CSS for responsive and mobile-first design.
+
+5. **Error Handling**:
+   - Implement proper error handling in both the frontend and backend.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Key Sections in the README:
+---
 
-1. **Live Links**: Links for frontend and backend (replace with actual live links).
-2. **Technologies Used**: List of technologies used in the project.
-3. **Features**: A brief description of the key features of TaskPilot.
-4. **Dependencies**: Lists all dependencies for the frontend and backend, including versions.
-5. **Installation**: Detailed steps for setting up both frontend and backend, including environment variables setup.
-6. **Folder Structure**: Organization of the project's file structure.
-7. **Code Cleanliness & Best Practices**: Guidelines for maintaining clean code and best practices.
-8. **License**: Information about the project's license.
+## Contributing
 
-Let me know if you need any more adjustments!
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
+
+---
+
+## Contact
+
+For any questions or feedback, feel free to reach out:
+- **Inzamul Haque**: [GitHub](https://github.com/inzamulhaque1) | [Email](mailto:inzamulhaque1@gmail.com)
+
+---
+
+Thank you for using **TaskPilot**! 🚀
+
+--- 
+
+This README is concise, well-structured, and follows the style of the default Vite + React template. Let me know if you need further adjustments! 😊
