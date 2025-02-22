@@ -324,240 +324,233 @@ const WorkSpace = () => {
 
   return (
     <div className="p-6">
-      <div className="mb-6">
-        <form onSubmit={handleAddTask} className="flex gap-4 flex-wrap">
-          <input
-            type="text"
-            placeholder="Task title"
-            value={newTask.title}
-            onChange={(e) =>
-              setNewTask((prev) => ({ ...prev, title: e.target.value }))
-            }
-            maxLength={50}
-            required
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <textarea
-            placeholder="Description (optional)"
-            value={newTask.description}
-            onChange={(e) =>
-              setNewTask((prev) => ({ ...prev, description: e.target.value }))
-            }
-            maxLength={200}
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <select
-            value={newTask.category}
-            onChange={(e) =>
-              setNewTask((prev) => ({ ...prev, category: e.target.value }))
-            }
-            className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="To-Do">To-Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
-          </select>
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Add Task
-          </button>
-        </form>
-      </div>
+<div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+  <form onSubmit={handleAddTask} className="flex flex-col sm:flex-row gap-3">
+    {/* Task Title Input */}
+    <input
+      type="text"
+      placeholder="Task title"
+      value={newTask.title}
+      onChange={(e) =>
+        setNewTask((prev) => ({ ...prev, title: e.target.value }))
+      }
+      maxLength={50}
+      required
+      className="w-full sm:flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-200 text-sm"
+    />
 
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
-          {Object.entries(tasks).map(([category, categoryTasks]) => (
-            <div key={category} className={`rounded-lg shadow-lg p-2  ${
-                category === "Done"
-                  ? "bg-green-100 "
-                  : category === "In Progress"
-                  ? "bg-yellow-100 "
-                  : "bg-blue-100 rounded-full "
-              }`}>
-              <h2 className="font-bold text-lg mb-4 text-center ">{category}</h2>
-              <Droppable droppableId={category}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className={`min-h-[200px] rounded-lg p-2 ${
-                      snapshot.isDraggingOver ? "bg-blue-50" : ""
-                    }`}
-                  >
-                    {categoryTasks.map((task, index) => (
-                      <Draggable
-                        key={task._id}
-                        draggableId={task._id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className={`task-container mb-4 bg-white rounded-lg shadow cursor-move ${
-                              snapshot.isDragging
-                                ? "shadow-lg ring-2 ring-blue-500"
-                                : ""
-                            } hover:bg-gray-50`}
-                          >
-                            {editingTask === task._id ? (
-                              // Edit Form
-                              <form
-                                onSubmit={(e) => handleUpdateTask(task._id, e)}
-                                className="space-y-2"
-                              >
-                                <input
-                                  type="text"
-                                  value={editedTask.title}
-                                  onChange={(e) =>
-                                    setEditedTask((prev) => ({
-                                      ...prev,
-                                      title: e.target.value,
-                                    }))
-                                  }
-                                  maxLength={50}
-                                  required
-                                  className="w-full px-2 py-1 border rounded"
-                                />
-                                <textarea
-                                  value={editedTask.description}
-                                  onChange={(e) =>
-                                    setEditedTask((prev) => ({
-                                      ...prev,
-                                      description: e.target.value,
-                                    }))
-                                  }
-                                  maxLength={200}
-                                  className="w-full px-2 py-1 border rounded"
-                                />
-                                <div className="flex gap-2">
-                                  <button
-                                    type="submit"
-                                    className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-                                  >
-                                    Save
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={cancelEdit}
-                                    className="px-2 py-1 bg-red-500 text-white rounded hover:bg-blue-600"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </form>
-                            ) : (
-                              // Display Mode
-                              <div
-                                className={`flex items-center justify-between p-2  dark:bg-gray-800 rounded-lg shadow-sm hover:border transition-shadow ${
+    {/* Task Description Textarea */}
+    <textarea
+      placeholder="Description (optional)"
+      value={newTask.description}
+      onChange={(e) =>
+        setNewTask((prev) => ({ ...prev, description: e.target.value }))
+      }
+      maxLength={200}
+      rows={2}
+      className="w-full sm:flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-200 resize-none text-sm"
+    />
+
+    {/* Task Category Dropdown */}
+    <select
+      value={newTask.category}
+      onChange={(e) =>
+        setNewTask((prev) => ({ ...prev, category: e.target.value }))
+      }
+      className="w-full sm:w-auto px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200 appearance-none text-sm"
+    >
+      <option value="To-Do">To-Do</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Done">Done</option>
+    </select>
+
+    {/* Add Task Button */}
+    <button
+      type="submit"
+      className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 shadow-md hover:shadow-lg active:bg-blue-700 text-sm"
+    >
+      Add Task
+    </button>
+  </form>
+</div>
+
+
+
+<DragDropContext onDragEnd={handleDragEnd}>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-2 sm:p-4 md:p-6 ">
+    {Object.entries(tasks).map(([category, categoryTasks]) => (
+      <div 
+        key={category} 
+        className={`rounded-2xl shadow-xl p-3 sm:p-4 transition-all duration-300 ${
+          category === "Done"
+            ? "bg-green-50 dark:bg-green-900/20"
+            : category === "In Progress"
+            ? "bg-yellow-50 dark:bg-yellow-900/20"
+            : "bg-blue-50 dark:bg-blue-900/20"
+        }`}
+      >
+        <h2 className="font-bold text-lg sm:text-xl mb-3 sm:mb-4 text-center text-gray-800 dark:text-gray-100 truncate">
+          {category}
+        </h2>
+        <Droppable droppableId={category}>
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className={`min-h-[150px] sm:min-h-[200px] rounded-xl p-2 sm:p-3 ${
+                snapshot.isDraggingOver 
+                  ? "bg-gray-100 dark:bg-gray-800/50" 
+                  : "bg-white dark:bg-gray-800"
+              } transition-colors duration-200 overflow-y-auto max-h-[calc(100vh-200px)]`}
+            >
+              {categoryTasks.map((task, index) => (
+                <Draggable
+                  key={task._id}
+                  draggableId={task._id}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className={`mb-3 sm:mb-4 rounded-xl shadow-md cursor-move bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 ${
+                        snapshot.isDragging
+                          ? "shadow-xl ring-2 ring-indigo-500 dark:ring-indigo-400 scale-[1.02]"
+                          : "hover:shadow-lg"
+                      } transition-all duration-200`}
+                    >
+                      {editingTask === task._id ? (
+                        // Edit Form
+                        <form
+                          onSubmit={(e) => handleUpdateTask(task._id, e)}
+                          className="p-3 sm:p-4 space-y-3"
+                        >
+                          <input
+                            type="text"
+                            value={editedTask.title}
+                            onChange={(e) =>
+                              setEditedTask((prev) => ({
+                                ...prev,
+                                title: e.target.value,
+                              }))
+                            }
+                            maxLength={50}
+                            required
+                            className="w-full px-3 sm:px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all duration-200 text-sm sm:text-base"
+                          />
+                          <textarea
+                            value={editedTask.description}
+                            onChange={(e) =>
+                              setEditedTask((prev) => ({
+                                ...prev,
+                                description: e.target.value,
+                              }))
+                            }
+                            maxLength={200}
+                            className="w-full px-3 sm:px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 min-h-[60px] sm:min-h-[80px] resize-y transition-all duration-200 text-sm sm:text-base"
+                          />
+                          <div className="flex gap-2 flex-wrap justify-end">
+                            <button
+                              type="submit"
+                              className="px-3 sm:px-4 py-1 sm:py-2 bg-gradient-to-r from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 text-white rounded-lg hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-200 text-sm sm:text-base"
+                            >
+                              Save
+                            </button>
+                            <button
+                              type="button"
+                              onClick={cancelEdit}
+                              className="px-3 sm:px-4 py-1 sm:py-2 bg-gradient-to-r from-red-500 to-red-600 dark:from-red-600 dark:to-red-700 text-white rounded-lg hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200 text-sm sm:text-base"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+                      ) : (
+                        // Display Mode
+                        <div className="p-3 sm:p-4 flex flex-col gap-3 sm:gap-4">
+                          {/* Top Section: Number and Title */}
+                          <div className="flex items-center gap-3">
+                            <div className="flex-shrink-0">
+                              <span
+                                className={`flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full font-medium text-sm sm:text-base ${
                                   task.category === "Done"
-                                    ? "bg-green-50 border-green-500 "
+                                    ? "bg-green-500 text-white"
                                     : task.category === "In Progress"
-                                    ? "bg-yellow-50 border-yellow-500 "
-                                    : "bg-blue-50 border-blue-500 "
+                                    ? "bg-yellow-500 text-white"
+                                    : "bg-blue-500 text-white"
                                 }`}
                               >
-                                {/* Left Section: Task Number */}
-                                <div className="w-10 flex justify-center">
-                                  <span
-                                    className={`flex items-center justify-center w-8 h-8 rounded-full font-medium ${
-                                      task.category === "Done"
-                                        ? "bg-green-500 text-white"
-                                        : task.category === "In Progress"
-                                        ? "bg-yellow-800 text-yellow-50"
-                                        : "bg-blue-800 text-white"
-                                    }`}
-                                  >
-                                    {index + 1}
-                                  </span>
-                                </div>
-
-                                {/* Middle Section: Task Title & Description (Takes Full Space) */}
-                                <div className="flex-1 pl-4">
-                                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                    {task.title}
-                                  </h3>
-                                  {task.description && (
-                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                                      {task.description}
-                                    </p>
-                                  )}
-                                  <p className="text-sm text-gray-500">
-  {moment(task.timestamp).format("MMM DD, YYYY | hh:mm A")}
-</p>
-                                </div>
-
-                                {/* Right Section: Options Dropdown & Action Buttons */}
-                                <div className="flex flex-col gap-1 items-center">
-                                  {/* Edit & Delete Buttons Below Dropdown */}
-                                  <div className="mt-2 flex gap-2">
-                                    <button
-                                      onClick={() => handleEditTask(task)}
-                                      className={`p-2 cursor-pointer rounded-md ${
-                                        task.category === "Done"
-                                          ? "bg-green-500 text-white"
-                                          : task.category === "In Progress"
-                                          ? "bg-yellow-200 text-yellow-800"
-                                          : "bg-blue-500 rounded-full text-white"
-                                      }`}
-                                      title="Edit Task"
-                                    >
-                                      <CiEdit />
-                                    </button>
-                                    <button
-                                      onClick={() => handleDeleteTask(task._id)}
-                                      className="p-2  cursor-pointer rounded-md bg-red-500 dark:bg-red-900 text-white dark:text-red-300 hover:bg-red-500 dark:hover:bg-red-700 hover:text-white transition"
-                                      title="Delete Task"
-                                    >
-                                      <MdDeleteForever />
-                                    </button>
-                                  </div>
-                                  <div>
-                                    {/* Category Dropdown */}
-                                    <select
-                                      value={task.category}
-                                      onChange={(e) =>
-                                        handleCategoryChange(
-                                          task._id,
-                                          e.target.value
-                                        )
-                                      }
-                                      className={`relative px-3 py-2 text-sm text-center font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer ${
-                                        task.category === "Done"
-                                          ? "bg-green-500 text-white hover:bg-green-900"
-                                          : task.category === "In Progress"
-                                          ? "bg-yellow-200 text-yellow-900 hover:bg-yellow-900 hover:text-yellow-100"
-                                          : "bg-blue-500 text-white hover:bg-blue-900"
-                                      }`}
-                                    >
-                                      <option value="To-Do">
-                                        To-Do
-                                      </option>
-                                      <option value="In Progress">
-                                        In Progress
-                                      </option>
-                                      <option value="Done">Done</option>
-                                      {/* Custom Arrow Icon */}
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                            )}
+                                {index + 1}
+                              </span>
+                            </div>
+                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 truncate flex-1">
+                              {task.title}
+                            </h3>
                           </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
+
+                          {/* Middle Section: Description */}
+                          {task.description && (
+                            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {task.description}
+                            </p>
+                          )}
+                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                            {moment(task.timestamp).format("MMM DD, YYYY | hh:mm A")}
+                          </p>
+
+                          {/* Bottom Section: Actions */}
+                          <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center justify-between">
+                            <select
+                              value={task.category}
+                              onChange={(e) =>
+                                handleCategoryChange(task._id, e.target.value)
+                              }
+                              className={`w-full sm:w-32 px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 appearance-none cursor-pointer bg-gradient-to-r transition-all duration-200 ${
+                                task.category === "Done"
+                                  ? "from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700"
+                                  : task.category === "In Progress"
+                                  ? "from-yellow-500 to-yellow-600 text-white hover:from-yellow-600 hover:to-yellow-700"
+                                  : "from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700"
+                              }`}
+                            >
+                              <option value="To-Do">To-Do</option>
+                              <option value="In Progress">In Progress</option>
+                              <option value="Done">Done</option>
+                            </select>
+                            <div className="flex gap-2 justify-end">
+                              <button
+                                onClick={() => handleEditTask(task)}
+                                className="p-1 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-500 dark:hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
+                                title="Edit Task"
+                              >
+                                <CiEdit size={18} className="sm:w-5 sm:h-5" />
+                              </button>
+                              <button
+                                onClick={() => handleDeleteTask(task._id)}
+                                className="p-1 sm:p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-500 dark:hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
+                                title="Delete Task"
+                              >
+                                <MdDeleteForever size={18} className="sm:w-5 sm:h-5" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
             </div>
-          ))}
-        </div>
-      </DragDropContext>
+          )}
+        </Droppable>
+      </div>
+    ))}
+  </div>
+</DragDropContext>
+
+
     </div>
   );
 };

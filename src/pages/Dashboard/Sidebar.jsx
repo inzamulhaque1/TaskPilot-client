@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import { FaTachometerAlt, FaHome, FaUser, FaTasks, FaProjectDiagram, FaCalendarAlt, FaCog } from "react-icons/fa"; // Icons from react-icons
+import { FaTachometerAlt, FaHome, FaUser,  FaCalendarAlt } from "react-icons/fa"; // Icons from react-icons
 
 const Sidebar = ({ isSidebarOpen }) => {
   // Sidebar navigation items relevant to TaskPilot
@@ -8,10 +8,8 @@ const Sidebar = ({ isSidebarOpen }) => {
     { path: "/dashboard", label: "Dashboard", icon: <FaTachometerAlt /> },
     { path: "/", label: "Home", icon: <FaHome /> },
     { path: "dashboard/profile", label: "My Profile", icon: <FaUser /> },
-    { path: "/tasks", label: "Tasks", icon: <FaTasks /> },
-    { path: "/projects", label: "Projects", icon: <FaProjectDiagram /> },
     { path: "/calendar", label: "Calendar", icon: <FaCalendarAlt /> },
-    { path: "/settings", label: "Settings", icon: <FaCog /> },
+   
   ];
 
   return (
