@@ -44,14 +44,14 @@ const SocialLogin = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-5">
+    <div className="flex flex-col exo2 items-center p-5">
       {/* Error Display */}
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
       {/* Google Login Button */}
       <button
         onClick={handleGoogleSignIn}
-        className="flex items-center cursor-pointer justify-center w-full max-w-xs bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex items-center font-bold text-red-600 cursor-pointer justify-center w-full max-w-xs bg-white border border-red-300 py-2 px-4 rounded-md hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <FcGoogle className="h-6 w-6 mr-2" />
         Sign in with Google

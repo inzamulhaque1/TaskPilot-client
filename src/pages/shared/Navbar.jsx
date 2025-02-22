@@ -77,7 +77,7 @@ const Navbar = () => {
             aria-label="Toggle dark mode"
           >
             <span
-              className={`absolute transition-all duration-500 ease-in-out ${
+              className={`absolute transition-all hover:rotate-360 duration-500 ease-in-out ${
                 darkMode
                   ? "opacity-0 rotate-90 scale-0"
                   : "opacity-100 rotate-0 scale-100"
@@ -100,13 +100,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+                className="bg-blue-500 text-white font-bold border border-white px-4 py-2 rounded-full shadow-md hover:bg-lime-500 transition duration-300"
               >
                 Login
               </Link>
               <Link
                 to="/registration"
-                className="bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
+                className="bg-green-500 text-white border border-white font-bold px-4 py-2 rounded-full shadow-md hover:bg-sky-600 transition duration-300"
               >
                 Registration
               </Link>

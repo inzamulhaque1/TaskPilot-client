@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import  { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft } from "react-icons/fa";
-import { Link, useNavigate,  } from "react-router-dom"; // Assuming you're using React Router for navigation
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuth from "../../hooks/UseAuth";
 
@@ -13,54 +13,62 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const { signIn } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
     try {
       await signIn(data.email, data.password);
       navigate("/dashboard");
     } catch (error) {
-      let errorMessage = "Login failed. Please try again.";
-      if (error.code === "auth/user-not-found") {
-        errorMessage = "No user found with this email.";
-      } else if (error.code === "auth/wrong-password") {
-        errorMessage = "Incorrect password.";
-      } else if (error.code === "auth/invalid-email") {
-        errorMessage = "Invalid email format.";
-      } else {
-        errorMessage = error.message;
-      }
-      setError(errorMessage);
+      const errorMessages = {
+        "auth/user-not-found": "No user found with this email.",
+        "auth/wrong-password": "Incorrect password.",
+        "auth/invalid-email": "Invalid email format.",
+      };
+      setError(errorMessages[error.code] || error.message || "Login failed. Please try again.");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
+    <div className="min-h-screen exo2 flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 transition-colors duration-300">
+      <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg shadow-blue-500 w-full max-w-md relative">
         {/* Back to Home Icon */}
         <Link
-          to={'/'} 
-          className="absolute top-4 left-4 text-gray-600 hover:text-gray-800"
+          to="/"
+          className="absolute top-4 left-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-200"
+          aria-label="Back to Home"
         >
-          <FaArrowLeft className="h-6 w-6" />
+          <FaArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
         </Link>
 
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+        {/* Title */}
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">
           Login
         </h2>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg text-sm text-center">
+            {error}
+          </div>
+        )}
+
+        {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Email
             </label>
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaEnvelope className="h-5 w-5 text-green-500" />
+                <FaEnvelope className="h-5 w-5 text-green-500 dark:text-green-400" />
               </div>
               <input
                 type="email"
@@ -72,71 +80,81 @@ const Login = () => {
                     message: "Invalid email address",
                   },
                 })}
-                className={`block w-full pl-10 pr-4 py-2 border ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={`block w-full pl-10 pr-4 py-2 sm:py-3 border ${
+                  errors.email
+                    ? "border-red-500 dark:border-red-400"
+                    : "border-gray-300 dark:border-gray-600"
+                } rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 transition-all duration-200`}
                 placeholder="Enter your email"
               />
             </div>
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              <p className="text-red-500 dark:text-red-400 text-xs sm:text-sm mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Password
             </label>
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaLock className="h-5 w-5 text-green-500" />
+                <FaLock className="h-5 w-5 text-green-500 dark:text-green-400" />
               </div>
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
-                {...register("password", {
-                  required: "Password is required",
-                })}
-                className={`block w-full pl-10 pr-12 py-2 border ${
-                  errors.password ? "border-red-500" : "border-gray-300"
-                } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500`}
+                {...register("password", { required: "Password is required" })}
+                className={`block w-full pl-10 pr-12 py-2 sm:py-3 border ${
+                  errors.password
+                    ? "border-red-500 dark:border-red-400"
+                    : "border-gray-300 dark:border-gray-600"
+                } rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 transition-all duration-200`}
                 placeholder="Enter your password"
               />
-              <div
-                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex cursor-pointer items-center text-gray-500 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? (
-                  <FaEyeSlash className="h-5 w-5 text-red-500" />
-                ) : (
-                  <FaEye className="h-5 w-5 text-green-500" />
-                )}
-              </div>
+                {showPassword ? <FaEyeSlash className="h-5 w-5" /> : <FaEye className="h-5 w-5" />}
+              </button>
             </div>
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+              <p className="text-red-500 dark:text-red-400 text-xs sm:text-sm mt-1">
+                {errors.password.message}
+              </p>
             )}
           </div>
 
           {/* Submit Button */}
-          <div>
-            <button
-              type="submit"
-              className="w-full cursor-pointer bg-green-700 text-white py-2 px-4 font-bold rounded-md hover:bg-lime-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Login
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="w-full bg-green-600 cursor-pointer dark:bg-green-700 text-white py-2 sm:py-3 px-4 rounded-lg font-semibold hover:bg-green-700 dark:hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400 active:scale-95 transition-all duration-200"
+          >
+            Login
+          </button>
 
-          {/* Don't have an account? Register here */}
-          <div className="text-center text-sm text-gray-600">
-            <span>Don't have an account? </span>
-            <Link to="/registration" className="text-blue-600 hover:underline">
+          {/* Register Link */}
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+            Don't have an account?{" "}
+            <Link
+              to="/registration"
+              className="text-green-600 dark:text-green-400 hover:underline font-medium"
+            >
               Register here
             </Link>
           </div>
-          <SocialLogin></SocialLogin>
+
+          {/* Social Login */}
+          <SocialLogin />
         </form>
       </div>
     </div>

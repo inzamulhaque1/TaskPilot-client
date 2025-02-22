@@ -142,10 +142,10 @@ const MyProfile = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-[#211444] rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-6">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-[#211444] rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6">
         {/* Profile Picture and Edit Option */}
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row items-center space-x-4 mb-4 md:mb-0">
           <div className="relative group">
             {imageError || !cachedUserData?.photoURL ? (
               <div className="w-24 h-24 rounded-full bg-blue-500 dark:bg-blue-700 flex items-center justify-center border-4 border-gray-300 dark:border-gray-600 text-white text-4xl font-bold">

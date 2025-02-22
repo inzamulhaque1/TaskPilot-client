@@ -44,7 +44,7 @@ const Dashboard = () => {
             isSidebarOpen ? "w-64" : "w-0 md:w-64"
           } bg-gray-800 text-white transition-all duration-300 flex flex-col justify-between overflow-hidden`}
         >
-          <Sidebar isSidebarOpen={isSidebarOpen} />
+          <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>
           <div className="p-4">
             <button
               onClick={logOut}
