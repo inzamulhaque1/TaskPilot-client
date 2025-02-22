@@ -1,6 +1,4 @@
-Got it! If you're looking for a **README.md** file that aligns with the style of the default Vite + React template, here's a clean and concise version tailored for your **TaskPilot** project:
 
----
 
 # TaskPilot
 
@@ -24,8 +22,8 @@ Got it! If you're looking for a **README.md** file that aligns with the style of
 
 ## Live Links
 
-- **Frontend**: [TaskPilot Client](https://taskpilot-client.vercel.app)
-- **Backend**: [TaskPilot Server](https://taskpilot-server.vercel.app)
+- **Frontend**: [TaskPilot Client](https://job-portal-bb2fa.web.app/)
+- **Backend**: [TaskPilot Server](https://taskpilot-server-pied.vercel.app)
 
 ---
 
@@ -91,40 +89,6 @@ Got it! If you're looking for a **README.md** file that aligns with the style of
 
 ---
 
-## Folder Structure
-
-### Frontend:
-```
-TaskPilot-client/
-├── public/
-├── src/
-│   ├── assets/            # Static assets (images, logos, etc.)
-│   ├── components/        # Reusable components
-│   ├── pages/             # Application pages
-│   ├── utils/             # Utility functions
-│   ├── App.jsx            # Main application component
-│   ├── main.jsx           # Entry point
-├── .eslintrc.js           # ESLint configuration
-├── .gitignore             # Git ignore file
-├── package.json           # Frontend dependencies
-├── tailwind.config.js     # Tailwind CSS configuration
-└── vite.config.js         # Vite configuration
-```
-
-### Backend:
-```
-TaskPilot-server/
-├── controllers/           # Request handlers
-├── models/                # Database models
-├── routes/                # API routes
-├── utils/                 # Utility functions
-├── index.js               # Entry point
-├── .env                   # Environment variables
-├── .gitignore             # Git ignore file
-└── package.json           # Backend dependencies
-```
-
----
 
 ## Dependencies
 
@@ -210,20 +174,6 @@ TaskPilot-server/
 
 ---
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeatureName`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeatureName`).
-5. Open a pull request.
 
 ---
 
