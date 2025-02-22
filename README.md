@@ -27,27 +27,31 @@
 
 ---
 
-## Technologies Used
+## Technologies Used 🛠️
 
-### Frontend:
-- **React**: A JavaScript library for building user interfaces.
-- **Vite**: A fast build tool for modern web development.
-- **Tailwind CSS**: A utility-first CSS framework for styling.
-- **Framer Motion**: For animations and transitions.
-- **Axios**: For making HTTP requests to the backend.
-- **React Icons**: For icons used in the application.
-- **React Router DOM**: For client-side routing.
-- **Socket.IO Client**: For real-time communication with the backend.
-- **Date-fns**: For date manipulation and formatting.
-
-### Backend:
-- **Express.js**: A Node.js framework for building RESTful APIs.
-- **MongoDB**: A NoSQL database for storing tasks and user data.
-- **Socket.IO**: For real-time communication with the frontend.
-- **CORS**: For enabling cross-origin resource sharing.
-- **Dotenv**: For managing environment variables.
+### Frontend 🌐:
+- **React** ![React Icon](https://img.icons8.com/ios/50/000000/react.png): A JavaScript library for building user interfaces.
+- **Vite** ![Vite Icon](https://img.icons8.com/ios/50/000000/vite.png): A fast build tool for modern web development.
+- **Tailwind CSS** ![Tailwind CSS Icon](https://img.icons8.com/ios/50/000000/tailwindcss.png): A utility-first CSS framework for styling.
+- **Framer Motion** ![Framer Motion Icon](https://img.icons8.com/ios/50/000000/framer-motion.png): For animations and transitions.
+- **Axios** ![Axios Icon](https://img.icons8.com/ios/50/000000/axios.png): For making HTTP requests to the backend.
+- **React Icons** ![React Icons Icon](https://img.icons8.com/ios/50/000000/react-icons.png): For icons used in the application.
+- **React Router DOM** ![React Router Icon](https://img.icons8.com/ios/50/000000/react-router.png): For client-side routing.
+- **Socket.IO Client** ![Socket.IO Icon](https://img.icons8.com/ios/50/000000/socket-io.png): For real-time communication with the backend.
+- **Date-fns** ![Date-fns Icon](https://img.icons8.com/ios/50/000000/date-fns.png): For date manipulation and formatting.
 
 ---
+
+### Backend ⚙️:
+- **Express.js** ![Express Icon](https://img.icons8.com/ios/50/000000/express.png): A Node.js framework for building RESTful APIs.
+- **MongoDB** ![MongoDB Icon](https://img.icons8.com/ios/50/000000/mongodb.png): A NoSQL database for storing tasks and user data.
+- **Socket.IO** ![Socket.IO Icon](https://img.icons8.com/ios/50/000000/socket-io.png): For real-time communication with the frontend.
+- **CORS** ![CORS Icon](https://img.icons8.com/ios/50/000000/cors.png): For enabling cross-origin resource sharing.
+- **Dotenv** ![Dotenv Icon](https://img.icons8.com/ios/50/000000/dotenv.png): For managing environment variables.
+
+---
+
+
 
 ## Installation
 
