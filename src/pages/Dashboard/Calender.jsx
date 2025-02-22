@@ -25,7 +25,7 @@ const Calendar = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("/tasks");
+        const response = await axios.get("https://taskpilot-server-pied.vercel.app/tasks");
         if (Array.isArray(response.data)) {
           setTasks(response.data);
         } else {
