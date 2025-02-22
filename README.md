@@ -36,6 +36,9 @@ Backend:
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;"> <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" /> <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /> <img src="https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=socket.io&logoColor=white" alt="Socket.IO" /> <img src="https://img.shields.io/badge/CORS-000000?style=for-the-badge&logo=cors&logoColor=white" alt="CORS" /> <img src="https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="Dotenv" /> </div>
 
 
+Screenshots
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;"> <img src="https://github.com/inzamulhaque1/TaskPilot-client/blob/main/src/assets/images/screenshots/ss1.png" alt="Screenshot 1" width="300" /> <img src="https://github.com/inzamulhaque1/TaskPilot-client/blob/main/src/assets/images/screenshots/ss2.png" alt="Screenshot 2" width="300" /> <img src="https://github.com/inzamulhaque1/TaskPilot-client/blob/main/src/assets/images/screenshots/ss3.png" alt="Screenshot 3" width="300" /> </div>
+
 
 ## Installation
 
